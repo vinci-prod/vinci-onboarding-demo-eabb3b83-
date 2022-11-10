@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vinci onboarding demo</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/x-icon" href=>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+  <script>
+    window.addEventListener('load', async () => {
+        const ignore = ["WEB3_CONNECT_MODAL_ID", "template", "inputNext", "eth", "sol", "error-text", "discord", "twitter", "linkedTwitter", "linkedDiscord", "but", "complete",  "completeC",  "completeC1"];
+        var allElements = document.querySelectorAll('*[id]');
+        for (var i = 0, n = allElements.length; i < n; ++i) {
+            var el = allElements[i];
+            if (!ignore.includes(el.id)) {
+                if (el.id && el.tagName === "BUTTON") {
+                    document.querySelector("#" + el.id).addEventListener("click", addUserDecision);
+                }
+            }
+        }
+        init(); 
+        if(document.querySelector("#eth") !== null){
+            document.querySelector("#eth").addEventListener("click", onConnect);
+        }
+        if(document.querySelector("#inputNext") !== null){
+            document.querySelector("#inputNext").addEventListener("click", checkUserInput);
+        }
+        if(document.querySelector("#sol") !== null){
+            document.querySelector("#sol").addEventListener("click", onSolConnect);
+        }
+        if(document.querySelector("#discord") !== null){
+            document.querySelector("#discord").addEventListener("click", openPopupD);
+        }
+        if(document.querySelector("#twitter") !== null){
+            document.querySelector("#twitter").addEventListener("click", openPopupT);
+        }
+        if(document.querySelector("#completeT") !== null){
+            addxptopath();
+        }
+        if(document.querySelector("#completeC") !== null){
+            let emoji = null
+            if(emoji !== null){
+                emoji = [emoji];
+            }else{
+                emoji = null;
+            }
+            const completeMessage = "Thank you for completing the onboarding! You can now close this page.";
+            document.querySelector("#completeC").addEventListener("click", function(e){
+                confettiComplete(event, emoji, completeMessage)
+                e.preventDefault();
+                return false;
+            });
+        }
+        
+    });
+    </script>
+    
+    <script>
+    function dontHref(){
+        return false;
+    }
+    </script>
+
+    <script>
+    window.addEventListener('load', async () => {
+        if(document.getElementById('inputNext')){
+            var popupTick = setInterval(function () {
+                let inputs = document.getElementsByClassName('required');
+                let btn =  document.getElementById('inputNext');
+                let isValid = true;
+
+                for (var i = 0; i < inputs.length; i++){
+                    let changedInput = inputs[i];
+                    if (changedInput.value.trim() === "" || changedInput.value === null){
+                        isValid = false;
+                        break;
+                    }
+                }
+                if(document.querySelector("#linkedDiscord") !== null){
+                    const elem = document.querySelector("#linkedDiscord");
+                    var html = elem.innerHTML;
+                    if(html.includes("Linked")){
+                        isValid = true;
+                    }else{
+                        isValid = false;
+                    }
+                }
+                if(document.querySelector("#linkedTwitter") !== null){
+                    const elem = document.querySelector("#linkedTwitter");
+                    var html = elem.innerHTML;
+                    if(html.includes("Linked")){
+                        isValid = true;
+                    }else{
+                        isValid = false;
+                    }
+                }
+                btn.disabled = !isValid;
+            }, 1000);
+        }
+    });
+    </script>
+</head>
+    <body>
+        <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
+        <script type="text/javascript" src="js/index.js"></script> 
+        <div id="template" class="ConnectWGradienttextureRootRoot  baseTop  baseTop1"><img alt="background" style="background-image:url()" src="https://firebasestorage.googleapis.com/v0/b/vinci-dev-6e577.appspot.com/o/default-logo%2FtopLogo.png?alt=media" class="image_ButtonsTemplate InputBrandLogo1 "/><div id="" class="InputFlexColumn inputFlexColumn  col1"><div class="ConnectWCardsvinciOnboarding connectWCardsvinciOnboarding"><img alt="background" style="background-image:url()" src="https://firebasestorage.googleapis.com/v0/b/vinci-dev-6e577.appspot.com/o/default-logo%2FleftLogo.png?alt=media" class="ConnectWLogo connectWLogo"/><div class="ConnectWFlexColumn"><div class="ConnectWBody"><div class="ConnectWText1 title">Please connect your wallet to join Vinci&#x27;s Community</div><div class="ConnectWParagraph paragP"></div></div><div class="ConnectWParagraph1 paragP">You need to hold at least 1 Genesis Vinci NFT</div></div><div class="ConnectWDividerCTA connectWDividerCTA"><div class="ConnectWFlexRow"><button id="eth" class="ConnectWLastWeek connectWLastWeek" data-address="0x2029ac0e4d7f59c3587636064b4ae60bdd56132c" data-chain="eth" data-numberofneededtokens="1" data-href="screen-74a61af6-1a48-40c3-aa57-06d0d2ec527b">Connect Wallet</button></div><div class="ConnectWDivider" src="https://file.rendit.io/n/CEh74J6Ph7HtqAeHvZtW.svg"></div><div class="ConnectWFlexRow"><a class="ConnectWLastWeek1A connectWLastWeek" href="https://opensea.io/assets/ethereum/0x2029ac0e4d7f59c3587636064b4ae60bdd56132c/0" target="_blank" rel="noreferrer"><button class="ConnectWLastWeek1 connectWLastWeek">Buy on OpenSea</button></a></div></div><div id="error-text" class="ConnectWParagraph1 paragP"></div></div><div class="InputFlexRow1 row2"><a href="index.html"><button style="background-color:#0d1121" class="InputLastWeek4 buttonContent">Back</button></a></div></div></div>
+    </body>
+</html>
